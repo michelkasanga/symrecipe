@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}  &middot; Ingredient{% endblock %}
+
+{% block body %}
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
@@ -792,6 +788,5 @@
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
   </div>
-Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur dolorum hic temporibus, dolor nostrum ducimus accusamus nobis placeat ab inventore, tenetur, voluptas consequatur iste? Ipsam dolor sit tempore molestias. Praesentium!
-</body>
-</html>
+
+{% endblock %}

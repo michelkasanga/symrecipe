@@ -4,6 +4,8 @@
 
 {% block body %}
     <div class="container mt-4">
+    {% if not ingredient.items is same as([])%}
+    
     <h1 class="title "> Ingredients</h1>
  <div class="count">
     il y a {{ ingredient.getTotalItemCount }} ingredients
@@ -32,8 +34,9 @@
         <div class="navigation d-flex justify-content-center">
     {{ knp_pagination_render(ingredient) }}
 </div>
- 
-    
+        {% else %}
+    <h2>Empty</h2>
+    {% endif %}
   
     </div>
 {% endblock %}

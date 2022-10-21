@@ -9,7 +9,7 @@
             {{ encore_entry_link_tags('app') }}
             <link rel="stylesheet" href="{{asset('css/bootstrap/bootstrap.css')}}" />
             <link rel="stylesheet" href="{{asset('css/bootstrap/bootstrap-grid.css')}}" />
-            <link rel="stylesheet" href="{{asset('css/bootstrap/bootstrap-reboot.css')}}" />
+            <link rel="stylesheet" href="{{asset('css/bootstrap/bootstrap.min.css')}}" />
         {% endblock %}
 
         {% block javascripts %}
@@ -22,5 +22,8 @@
     {% endblock %}
   
         {% block body %}{% endblock %}
+
+        <script src=" {{asset('css/js/bootstrap.js')}}"></script>
+         <script src=" {{asset('css/js/bootstrap.bundle.js')}}"></script>
     </body>
 </html>
