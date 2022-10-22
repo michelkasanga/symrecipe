@@ -24,6 +24,7 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Prix</th>
                     <th scope="col">Date creation</th>
+                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>   
@@ -33,6 +34,10 @@
                      <td>{{ingredients.name}} </td>
                      <td>{{ingredients.price}} </td>
                      <td>{{ingredients.createdAt | date('Y M d')}} </td>
+                      <td>
+                        <a href="{{ path('app_ingredient_edit',{id: ingredients.id}) }}" class="btn  btn-primary"> edit</a>
+                         <a href="{{ path('app_ingredient_delete',{id: ingredients.id}) }}"  class="btn  btn-danger"> del</a>
+                       </td>
                 </tr>  
             {% endfor %} 
             </tbody>
