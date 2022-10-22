@@ -4,9 +4,16 @@
 
 {% block body %}
     <div class="container mt-4">
-    {% if not ingredient.items is same as([])%}
+   
     
     <h1 class="title "> Ingredients</h1>
+    <a class="btn btn-primary" href="{{ path('app_new_ingredient')}}"> Add</a>
+ {% if not ingredient.items is same as([])%}
+    {% for message in app.flashes('success') %}
+<div class="alert alert-info mt-4">
+         {{ message }}
+</div>
+{% endfor %}
  <div class="count">
     il y a {{ ingredient.getTotalItemCount }} ingredients
 </div>
