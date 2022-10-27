@@ -1,13 +1,12 @@
 {% extends "base.html.twig" %}
-
-{% block title %}  {{parent() }} | create ingredient {% endblock %}
+{% block title %}  {{parent() }} | create recipe {% endblock %}
 {% block body %}
     <div class="container mt-4">
-        <h2> create Ingredient </h2>
+        <h2> Create Recipe</h2>
 
   
-
-    {{ form_start(form) }}
+{{form(form)}}
+    {# {{ form_start(form) }}
 
             <div class="form-group ">
             {{ form_label(form.name) }}
@@ -31,7 +30,7 @@
             {{ form_row(form.submit) }}
              
             </div>
-    {{ form_end(form) }}
+    {{ form_end(form) }} #}
       
     </div>
 {% endblock %}

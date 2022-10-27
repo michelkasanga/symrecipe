@@ -25,7 +25,7 @@ public function index(IngredientRepository $repository, PaginatorInterface $pagi
     return $this->render('pages/ingredient/index.html.twig', compact('ingredient'));
 }
 
-#[Route('/new', name:'app_new_ingredient', methods:['GET', 'POST'])]
+#[Route('/ingredient/new', name:'app_new_ingredient', methods:['GET', 'POST'])]
 public function new (Request $request, IngredientRepository $repository): Response {
     $ingredient = new Ingredient();
     $form = $this->createForm(IngredientType::class, $ingredient);
