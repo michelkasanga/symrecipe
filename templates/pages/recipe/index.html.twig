@@ -9,11 +9,11 @@
     <h1 class="title "> Recettes</h1>
      <a class="btn btn-primary" href="{{ path('app_recipe_new')}}"> Add</a>
  {% if not recipes.items is same as([])%}
-    {# {% for message in app.flashes('success') %}
+    {% for message in app.flashes('success') %}
 <div class="alert alert-info mt-4">
          {{ message }}
 </div>
-{% endfor %} #}
+{% endfor %}
  <div class="count">
     il y a {{ recipes.getTotalItemCount }} recettes
 </div>
@@ -37,8 +37,8 @@
                              <td  class=" justify-content-center">{{recipe.difficulty == null ? 'nom renseigner' : recipe.difficulty}} </td>
                      <td  class=" justify-content-center">{{recipe.createdAt | date('Y M d')}} </td>
                       <td>
-                        {# <a href="{{ path('app_ingredient_edit',{id: ingredients.id}) }}" class="btn  btn-primary"> edit</a>
-                         <a href="{{ path('app_ingredient_delete',{id: ingredients.id}) }}"  class="btn  btn-danger"> del</a> #}
+                         <a href="{{ path('app_recipe_edit',{id: recipe.id}) }}" class="btn  btn-primary"> edit</a>
+                         <a href="{{ path('app_recipe_delete',{id: recipe.id}) }}"  class="btn  btn-danger"> del</a> 
                        
                        </td>
                 </tr>  

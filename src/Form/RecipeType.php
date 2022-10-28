@@ -76,7 +76,9 @@ class RecipeType extends AbstractType
                 'attr' =>[
                     'class' => 'form-control-range',
                     'minlength' => 1,
-                    'maxlength' => 5
+                    'maxlength' => 5,
+                    'step'=>1,
+                   
                 ],
                 'label' => 'Difficulte',
                 'label_attr' => [
@@ -119,8 +121,10 @@ class RecipeType extends AbstractType
             ->add('isFavorite'  , CheckboxType::class,  [
                 'attr' => [
                     'class' =>' .btn-group-toggle form-check',
+                
                     
-                ],
+                ],   
+                 'required'=>false,
                 'label' => 'Favoris  ?',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -132,18 +136,27 @@ class RecipeType extends AbstractType
             ])
             ->add('ingredients', EntityType::class, array(
                 'class' => Ingredient::class,
+
+                'label' => 'Les ingredients',
+                'label_attr' => [
+                    'class' => 'form-label mt-4 bold'
+                ],
+
                 'expanded' => true,
                 'multiple' => true,
                 'choice_attr' => function($val, $key, $index) {
-                    return array('required' => true);
-                },
+                    return array(
+                        'required' => false
+                    );
+                }
+                
             )
            ) 
             ->add('submit'  ,SubmitType::class,[
                 'attr'=>[
                     'class'=>'btn btn-primary mt-4'
                 ],
-                'label'=>'creer mon ingredient '
+                'label'=>'creer ma recette '
             ])
         ;
     }

@@ -15,6 +15,14 @@ class IngredientController extends AbstractController
 {
 
     #[Route('/ingredient', name:'app_ingredient')]
+    /**
+     * controller for all ingredients
+     *
+     * @param IngredientRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
 public function index(IngredientRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
     $ingredient = $paginator->paginate(
@@ -32,6 +40,7 @@ public function new (Request $request, IngredientRepository $repository): Respon
 
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
+
         $repository->save($form->getData(), true);
         $this->addFlash(
             'success',
@@ -42,6 +51,15 @@ public function new (Request $request, IngredientRepository $repository): Respon
     return $this->render('pages/ingredient/new.html.twig', ['form' => $form->createView()]);
 }
 
+
+/**
+ * Undocumented function
+ *
+ * @param Request $request
+ * @param IngredientRepository $repository
+ * @param Ingredient $ingredient
+ * @return Response
+ */
 #[Route('/ingredient/edit/{id}', name:'app_ingredient_edit', methods:['GET', 'POST'])]
 public function edit( Request $request, IngredientRepository $repository, Ingredient $ingredient): Response
 {
