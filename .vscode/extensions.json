@@ -4,6 +4,10 @@
         "nucllear.vscode-extension-auto-import",
         "aessoft.aessoft-class-autocomplete",
         "svipas.code-autocomplete",
-        "cschlosser.doxdocgen"
+        "cschlosser.doxdocgen",
+        "phproberto.vscode-php-getters-setters",
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-pack",
+        "neilbrayfield.php-docblocker"
     ]
 }
