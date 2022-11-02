@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent()}} | connexion{% endblock %}
+
+{% block body %}
+<div class="container">
+<h2 clas="mt-4"> Connexion</h2>
+{% if error %}
+<div class="alert alert-danger">
+    {{ error.messagekey|trans(error.messageData, 'security') }}
+    </div>
+{% endif %}
+
+  {% for message in app.flashes('success') %}
+<div class="alert alert-info mt-4">
+         {{ message }}
+</div>
+{% endfor %}
+<form action=" {{path('app_security')}} " method="post">
+    <div class="form-group">
+
+        <div class="form-floating mb-3"> 
+        <label for="floatingInput">Email </label>
+          <input type="email" class="form-control"  value=" {{ last_username }}"id="floatingInput" placeholder="name@example.com" name="_username">
+        </div>
+
+        <div class="form-floating">  
+          <label for="floatingPassword">Password</label>
+          <input type="password" name="_password" class="form-control" id="floatingPassword" placeholder="Password">
+        </div>
+
+      </div>
+      <button class="btn btn-primary"  type="submit" > Login </button>
+</form>
+</div>
+
+{% endblock %}
