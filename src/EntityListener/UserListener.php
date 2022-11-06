@@ -20,7 +20,7 @@ class  UserListener
 
     public function preUpdate(User $user)
     {
-        $this->encodePassWord($user);
+       $this->encodePassWord($user);
     }
 
     public function encodePassWord(User $user)
@@ -29,12 +29,12 @@ class  UserListener
         {
             return;
         }
-        $user->setPassword(
+     $user->setPlainPassword(
             $this->hasher->hashPassword(
                 $user,
                 $user->getPlainPassword()
             )
         );
-       
+   
     }
 }

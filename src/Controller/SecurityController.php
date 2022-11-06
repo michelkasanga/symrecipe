@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+
+
 class SecurityController extends AbstractController
 {
     #[Route('/logIn', name: 'app_security', methods:['GET', 'POST'])]
@@ -34,6 +36,7 @@ class SecurityController extends AbstractController
     {
         $user = new User();
         $form  = $this->createForm(RegistrationType::class, $user);
+ 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
