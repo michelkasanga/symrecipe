@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 
@@ -32,7 +35,7 @@ class SecurityController extends AbstractController
 
     
     #[Route('/signUp', name: 'app_security_sign_up', methods:['GET', 'POST'])]
-    public function registration( Request $request, UserRepository $userRepos): Response
+    public function registration( Request $request, UserPasswordHasherInterface $hasher  , EntityManagerInterface $manager): Response
     {
         $user = new User();
         $form  = $this->createForm(RegistrationType::class, $user);
@@ -41,7 +44,13 @@ class SecurityController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $userRepos->save($form->getData(), true);
+          
+           $user->setPassword(
+            $hasher->hashPassword($user, $user->getPlainPassword())
+           );
+          $manager->persist($form->getData());
+          $manager->flush();
+     
             $this->addFlash(
                 'success',
                 'votre compte a ete cree avec success!'

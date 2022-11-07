@@ -52,16 +52,24 @@ public function index(User $user, Request $request, UserRepository $repos, UserP
 #[Route('/user/updatePassword/{id}', name:'app_user_upadate_password', methods:['GET', 'POST'])]
 public function updatePasswordUser(User $user, Request $request,EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
     {
+
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_security');
+        }
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute('app_recipe');
+        }
     $form = $this->createForm(UserPasswordType::class);
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
         if ($hasher->isPasswordValid($user, $form->getData()['plainPassword'])) { 
-                    $user->setPassword(
-                        $hasher->hashPassword(
-                            $user,
-                                $form->getData()['newPassword']
-                            )
-                ) ;
+                    $user->setUpdatedAt(new \DateTimeImmutable());
+                    // $user->setPlainPassword(
+                    //     $form->getData()['newPassword']
+                    // );
+                    $user->setPassword( 
+                        $hasher->hashPassword($user, $form->getData()['newPassword'])
+                    );
                         
             $this->addFlash(
                 'success',
