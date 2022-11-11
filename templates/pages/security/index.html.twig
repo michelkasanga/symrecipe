@@ -19,18 +19,18 @@
 <form action=" {{path('app_security')}} " method="post">
     <div class="form-group">
 
-        <div class="form-floating mb-3"> 
+        <div class="mb-3"> 
         <label for="floatingInput">Email </label>
-          <input type="email" class="form-control"  value=" {{ last_username }}"id="floatingInput" placeholder="name@example.com" name="_username">
+          <input type="email" class="form-control me-2"  value=" {{ last_username }}"id="floatingInput" placeholder="name@example.com" name="_username">
         </div>
 
-        <div class="form-floating">  
+        <div class="">  
           <label for="floatingPassword">Password</label>
-          <input type="password" name="_password" class="form-control" id="floatingPassword" placeholder="Password">
+          <input type="password" name="_password" class="form-control me-2" id="floatingPassword" placeholder="Password">
         </div>
 
       </div>
-      <button class="btn btn-primary"  type="submit" > Login </button>
+      <button class="btn btn-primary mt-4"  type="submit" > Login </button>
 </form>
 </div>
 

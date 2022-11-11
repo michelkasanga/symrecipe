@@ -65,6 +65,11 @@ private  ?\DateTimeImmutable $updateAt = null;
 #[ORM\ManyToMany(targetEntity : Ingredient::class)]
 private Collection $ingredients;
 
+#[ORM\ManyToOne(inversedBy: 'recipes')]
+#[ORM\JoinColumn(nullable: false)]
+private ?User $user = null;
+
+
 public function __construct()
     {
     $this->ingredients = new ArrayCollection();
@@ -213,4 +218,18 @@ public function removeIngredient(Ingredient $ingredient): self
 
     return $this;
 }
+
+public function getUser(): ?User
+{
+    return $this->user;
+}
+
+public function setUser(?User $user): self
+{
+    $this->user = $user;
+
+    return $this;
+}
+
+
 }

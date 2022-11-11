@@ -1,34 +1,67 @@
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <div class="container-fluid">
+      <a class="navbar-brand" href=" {{path('app_home')}}">SYMRECIPE</a>
 
-            <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
-                <div class="container-fluid">
-                    <a href="" class="navbar-brand">SYMRECIPE</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-                    <div class="collapse navbar-collapse " id="navbarColor04">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a href="{{ path('app_home') }}" class="nav-link active">  Home
-                                    <span class="visually-hidden"></span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ path('app_ingredient') }}" class="nav-link"> 
-                                  Ingredients
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ path('app_recipe') }}" class="nav-link"> 
-                                  Recette
-                                </a>
-                            </li>
-                             <li class="nav-item">
-                                <a href="{{ path('app_security') }}" class="nav-link"> 
-                                  Connexion
-                                </a>
-                            </li>
-                        </ul>
-                    </div>  
-                </div>
-            </nav>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbar2Label">SYMRECIPE</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end ">
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href=" {{path('app_home')}} ">Home</a>
+            </li>
+
+            {% if app.user %}
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href=" {{path('app_ingredient')}} ">Ingredients</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href=" {{path('app_recipe')}} ">Recettes</a>
+                  </li>
+            {% endif %}
+          
+         
+
+          </ul>
+                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+{% if app.user %}
+        
+            <li class="nav-item dropdown" style="margin-right:5rem;">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
+                {{app.user.fullname}}
+              </a>
+                  <ul class="dropdown-menu mr-4 ml-4" >
+                    <li><a class="dropdown-item" href="  {{path('app_user_update', {id :  app.user.id})}}  ">Edit information</a></li>
+                    <li><a class="dropdown-item" href=" {{path('app_user_update_password' , {id :  app.user.id})}} ">Edit password</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href=" {{path('app_security_logout')}} ">LogOut</a></li>
+                  </ul>
+            </li>
+{% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href=" {{path('app_security_sign_up')}} ">signUp</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href=" {{path('app_security')}} ">login</a>
+                  </li>
+{% endif %}
+</ul>
+          <form class="d-flex mt-3 mt-lg-0" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </nav>

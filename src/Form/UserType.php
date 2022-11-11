@@ -33,7 +33,7 @@ class UserType extends AbstractType
             ])
             ->add('pseudo', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control me-2',
                     'minlength' => '2',
                     'maxlength' => '50',
                 ],
@@ -49,7 +49,7 @@ class UserType extends AbstractType
 
             ->add('plainPassword',   PasswordType::class, [
                     'attr'=>[
-                        'class'=> 'form-control',
+                        'class'=> 'form-control me-2',
                     ],
                     'label'=>  'Mot de passe*',
                     'label_attr'=>[

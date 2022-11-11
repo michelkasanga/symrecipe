@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Symrecipe{% endblock %}</title>
@@ -7,23 +7,102 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-            <link rel="stylesheet" href="{{asset('css/bootstrap/bootstrap.css')}}" />
-            <link rel="stylesheet" href="{{asset('css/bootstrap/bootstrap-grid.css')}}" />
-            <link rel="stylesheet" href="{{asset('css/bootstrap/bootstrap.min.css')}}" />
+            <link rel="stylesheet" href="{{asset('assets/css/bootstrap.css')}}" />
+
+              <style>
+                                .bd-placeholder-img {
+                                    font-size: 1.125rem;
+                                    text-anchor: middle;
+                                    -webkit-user-select: none;
+                                    -moz-user-select: none;
+                                    user-select: none;
+                                }
+                                .navbar {
+                                    margin-bottom: 20px;
+                                    }
+
+                                @media (min-width: 768px) {
+                                    .bd-placeholder-img-lg {
+                                    font-size: 3.5rem;
+                                    }
+                                }
+
+                                .b-example-divider {
+                                    height: 3rem;
+                                    background-color: rgba(0, 0, 0, .1);
+                                    border: solid rgba(0, 0, 0, .15);
+                                    border-width: 1px 0;
+                                    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+                                }
+
+                                .b-example-vr {
+                                    flex-shrink: 0;
+                                    width: 1.5rem;
+                                    height: 100vh;
+                                }
+
+                                .bi {
+                                    vertical-align: -.125em;
+                                    fill: currentColor;
+                                }
+
+                                .nav-scroller {
+                                    position: relative;
+                                    z-index: 2;
+                                    height: 2.75rem;
+                                    overflow-y: hidden;
+                                }
+
+                                .nav-scroller .nav {
+                                    display: flex;
+                                    flex-wrap: nowrap;
+                                    padding-bottom: 1rem;
+                                    margin-top: -1px;
+                                    overflow-x: auto;
+                                    text-align: center;
+                                    white-space: nowrap;
+                                    -webkit-overflow-scrolling: touch;
+                                }
+
+    
+
+
+            </style>
+
+      
+           
+         	
+       
+         
+            {# <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-utilities.css') }}" />
+           
+            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-reboot.css') }}" />
+     #}
         {% endblock %}
 
-        {% block javascripts %}
+                     {% block  javascripts %}
             {{ encore_entry_script_tags('app') }}
+            
+             <script src="{{ asset('assets/popper/popper.min.js') }}"></script>
+          
+
         {% endblock %}
+       
+
     </head>
     <body>
+    
     {% block nav %}
           {% include "partials/_navbar.html.twig" %}
     {% endblock %}
   
         {% block body %}{% endblock %}
 
-        <script src=" {{asset('css/js/bootstrap.js')}}"></script>
-         <script src=" {{asset('css/js/bootstrap.bundle.js')}}"></script>
+
+        {% block script %}
+             <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+             
+        {% endblock %}
+        
     </body>
 </html>

@@ -7,6 +7,7 @@ use App\Form\UserPasswordType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,20 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/user/update/{id}', name:'app_user_upadate', methods:['GET', 'POST'])]
-public function index(User $user, Request $request, UserRepository $repos, UserPasswordHasherInterface $hasher): Response
+    #[Security("is_granted('ROLE_USER') and user === User")]
+    #[Route('/user/update/{id}', name:'app_user_update', methods:['GET', 'POST'])]
+public function index(User $User, Request $request, UserRepository $repos, UserPasswordHasherInterface $hasher): Response
     {
-    if (!$this->getUser()) {
-        return $this->redirectToRoute('app_security');
-    }
-    if ($this->getUser() !== $user) {
-        return $this->redirectToRoute('app_recipe');
-    }
-    $form = $this->createForm(UserType::class, $user);
+  
+    $form = $this->createForm(UserType::class, $User);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-        if ($hasher->isPasswordValid($user, $form->getData()->getPlainPassword())) {
+        if ($hasher->isPasswordValid($User, $form->getData()->getPlainPassword())) {
             $repos->save($form->getData(), true);
             $this->addFlash(
                 'success',
@@ -49,33 +46,29 @@ public function index(User $user, Request $request, UserRepository $repos, UserP
     ]);
 }
 
-#[Route('/user/updatePassword/{id}', name:'app_user_upadate_password', methods:['GET', 'POST'])]
-public function updatePasswordUser(User $user, Request $request,EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
+#[Security("is_granted('ROLE_USER') and user === User")]
+#[Route('/user/updatePassword/{id}', name:'app_user_update_password', methods:['GET', 'POST'])]
+public function updatePasswordUser(User $User, Request $request,EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
     {
 
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_security');
-        }
-        if ($this->getUser() !== $user) {
-            return $this->redirectToRoute('app_recipe');
-        }
+     
     $form = $this->createForm(UserPasswordType::class);
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
-        if ($hasher->isPasswordValid($user, $form->getData()['plainPassword'])) { 
-                    $user->setUpdatedAt(new \DateTimeImmutable());
+        if ($hasher->isPasswordValid($User, $form->getData()['plainPassword'])) { 
+                    $User->setUpdatedAt(new \DateTimeImmutable());
                     // $user->setPlainPassword(
                     //     $form->getData()['newPassword']
                     // );
-                    $user->setPassword( 
-                        $hasher->hashPassword($user, $form->getData()['newPassword'])
+                    $User->setPassword( 
+                        $hasher->hashPassword($User, $form->getData()['newPassword'])
                     );
                         
             $this->addFlash(
                 'success',
                 'votre mot de passe a ete modifier avec success'
             );
-            $manager->persist($user);
+            $manager->persist($User);
             $manager->flush();
 
             return $this->redirectToRoute('app_recipe');
