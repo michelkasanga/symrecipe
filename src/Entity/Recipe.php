@@ -55,6 +55,9 @@ private  ?float $price = null;
 private  ?bool $isFavorite = null;
 
 #[ORM\Column]
+private ?bool $isPublic = null;
+
+#[ORM\Column]
 #[Assert\NotNull]
 private  ?\DateTimeImmutable $createdAt = null;
 
@@ -171,6 +174,18 @@ public function setIsFavorite(bool $isFavorite): self
     return $this;
 }
 
+public function isIsPublic(): ?bool
+{
+    return $this->isPublic;
+}
+
+public function setIsPublic(bool $isPublic): self
+{
+    $this->isPublic = $isPublic;
+
+    return $this;
+}
+
 public function getCreatedAt(): ?\DateTimeImmutable
 {
     return $this->createdAt;
@@ -188,7 +203,7 @@ public function getUpdateAt(): ?\DateTimeImmutable
     return $this->updateAt;
 }
 
-public function setUpdateAt(\DateTimeImmutable$updateAt): self
+public function setUpdateAt(\DateTimeImmutable $updateAt): self
     {
     $this->updateAt = $updateAt;
 
@@ -230,6 +245,8 @@ public function setUser(?User $user): self
 
     return $this;
 }
+
+
 
 
 }

@@ -62,22 +62,37 @@
                  {{  form_help(form.description) }}
       </div>
 
-       <div class="form-group ">
+        <div class="mb-3 form-check form-switch mt-4">
+            {{ form_widget(form.isFavorite) }}
             {{ form_label(form.isFavorite) }}
-              {{ form_widget(form.isFavorite) }}
+         
                 <code>
                 {{ form_errors(form.isFavorite) }}
                  </code>
                  {{  form_help(form.isFavorite) }}
       </div>
 
+       
+
        <div class="form-group ">
-           {{ form_label(form.ingredients) }}
-           <div class="mr-5 mt-4">   {{ form_widget(form.ingredients) }}</div>
+          {%  for field in form.ingredients %}
+          <div class="mt-4 mr-4 badge bg-success" style="display:inline; min-width:10%; ">
+       
+           {{ form_widget(field) }}
+               {{ form_label(field) }}
+</div>
+
+               {% endfor %}
+      </div>
+
+   <div class="mb-3 form-check form-switch mt-4">
+          {{ form_widget(form.isPublic) }}    
+          {{ form_label(form.isPublic) }}
+            
                 <code>
-                {{ form_errors(form.ingredients) }}
+                {{ form_errors(form.isPublic) }}
                  </code>
-                 {{  form_help(form.ingredients) }}
+                 {{  form_help(form.isPublic) }}
       </div>
              <div class="form-group ">
             {{ form_row(form.submit) }}

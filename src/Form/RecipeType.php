@@ -77,11 +77,11 @@ class RecipeType extends AbstractType
             ])
             ->add('difficulty', RangeType::class, [
                 'attr' =>[
-                    'class' => 'form-control-range',
-                    'minlength' => 1,
-                    'maxlength' => 5,
-                    'step'=>1,
-                   
+                    'class' => 'form-range',
+                    'min' => "1",
+                    'max' => "5",
+                    'step'=>"1",
+                    //  class="form-range" min="0" max="5" step="0.5"
                 ],
                 'label' => 'Difficulte',
                 'label_attr' => [
@@ -122,21 +122,42 @@ class RecipeType extends AbstractType
                   
             ])
             ->add('isFavorite'  , CheckboxType::class,  [
-                'attr' => [
-                    'class' =>' .btn-group-toggle form-check',
-                
-                    
-                ],   
+         
                  'required'=>false,
                 'label' => 'Favoris  ?',
+                
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'class' => 'form-check-label'
                 ],
+                'attr' => [
+                    'class' =>'form-check-input',
+                    'role' => 'switch',
+                    
+                ],   
                 'constraints' => [ 
                     new Assert\NotNull()
                 ]
                   
             ])
+
+            ->add('isPublic'  , CheckboxType::class,  [
+         
+                'required'=>false,
+               'label' => 'Public  ?',
+               
+               'label_attr' => [
+                   'class' => 'form-check-label '
+               ],
+               'attr' => [
+                   'class' =>'form-check-input',
+                   'role' => 'switch',
+                   
+               ],   
+               'constraints' => [ 
+                   new Assert\NotNull()
+               ]
+                 
+           ])
              ->add('ingredients',  EntityType::class, // array(
             //     'class' => Ingredient::class,
 

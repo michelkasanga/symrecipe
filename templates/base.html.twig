@@ -95,9 +95,9 @@
     {% block nav %}
           {% include "partials/_navbar.html.twig" %}
     {% endblock %}
-  
+    <div class="container">
         {% block body %}{% endblock %}
-
+</div>
 
         {% block script %}
              <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>

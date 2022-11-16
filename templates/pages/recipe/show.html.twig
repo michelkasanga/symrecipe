@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} | {{recipe.name}} {% endblock %}
+
+{% block body %}
+
+    <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          {# <strong class="d-inline-block mb-2 text-primary">World</strong> #}
+          <h3 class="mb-0"> {{recipe.name}} </h3>
+          <div class="mb-1 text-muted"></div>
+          <p class="card-text mb-auto"> {{recipe.description}} <br><br>
+          
+            {% for ingredient in recipe.ingredients %}
+                 <span class="badge text-bg-info flex-column" style="display:inline-block;"> {{ ingredient.name}}</span>
+          {% endfor %}
+          </p>
+
+        
+        </div>
+        <div class="col-auto d-none d-lg-block rounded text-bg-dark" >
+        <strong class="d-inline-block mb-2 text-primary">creation    </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <strong class="d-inline-block mb-2 text-primary">     Mis a jour</strong> <br> 
+        <h6 class=" btn btn-info mt-0  justify-content-center" style=" padding:2px; "> {{recipe.createdAt | date('d M Y')}}   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;   {{recipe.updateAt | date('d M Y')}} </h6>
+       
+
+          <div class="bd-placeholder-img mt-2 " width="200" height="250"  style=" padding:5px; "> 
+
+             
+         <p class="card-text mb-auto">
+              <small  class="stretched-link">prix :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.price == null ? 'Non' : recipe.price}} </strong> ,&nbsp;
+               <small  class="stretched-link">difficulty :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.difficulty == null ? 'Non' : recipe.difficulty}} </strong><br> 
+               <small  class="stretched-link">Nbr perso :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.nbPeople == null ? 'Non' : recipe.nbPeople}} </strong> ,&nbsp;
+               <small  class="stretched-link">Temps (min) :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.time == null ? 'Non' : recipe.time}} </strong><br> 
+               <small  class="stretched-link">Favorite :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.isFavorite == 0 ? 'Non' :'Oui'}} </strong> &nbsp;<br>
+         </p>
+         </div>
+
+        </div>
+      </div>
+    </div>
+{% endblock %}
