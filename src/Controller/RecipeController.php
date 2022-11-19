@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Mark;
 use App\Entity\Recipe;
-use App\Form\RecipeType;
-use App\Repository\RecipeRepository;
+use App\Form\MarkType;
 use DateTimeImmutable;
+use App\Form\RecipeType;
+use App\Repository\MarkRepository;
+use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RecipeController extends AbstractController
 {
@@ -72,10 +75,39 @@ public function indexPublic(PaginatorInterface $paginator, RecipeRepository $rep
 
 
 #[Security("is_granted('ROLE_USER') and recipe.isIsPublic() === true")]
-#[Route('/recipe/{id}', name:'app_show', methods:['GET'])]
-public function show(Recipe $recipe)
+#[Route('/recipe/{id}', name:'app_show', methods:['GET', 'POST'])]
+public function show(
+    Recipe $recipe, 
+    Request $request, 
+    MarkRepository $markRepository,
+    EntityManagerInterface $manager)
 {
-    return $this->render('pages/recipe/show.html.twig', ['recipe' => $recipe]);
+    $mark = new Mark();
+    $form = $this->createForm(MarkType::class, $mark);
+    $form->handleRequest($request);
+    if ($form->isSubmitted() && $form->isValid()) {
+        $mark      ->setUser($this->getUser())
+                        ->setRecipe($recipe);
+
+            $existingMark = $markRepository->findOneBy([
+                'user' => $this->getUser(),
+                'recipe' => $recipe
+            ]);
+
+            if (!$existingMark) {
+                $manager->persist($mark);
+            }else{
+                $existingMark->setMark(
+                    $form->getData() ->getMark()
+                );
+            }
+            $manager->flush();
+          
+
+            return $this->redirectToRoute('app_show', ['id' => $recipe->getId()]);
+    }
+    return $this->render('pages/recipe/show.html.twig',
+     ['recipe' => $recipe, 'form' => $form->createView()]);
 } 
 
 

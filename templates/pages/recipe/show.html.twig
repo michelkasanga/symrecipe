@@ -11,7 +11,7 @@
           {# <strong class="d-inline-block mb-2 text-primary">World</strong> #}
           <h3 class="mb-0"> {{recipe.name}} </h3>
           <div class="mb-1 text-muted"></div>
-          <p class="card-text mb-auto"> {{recipe.description}} <br><br>
+          <p class="card-text mb-auto"> {{recipe.description  | slice(0, 100) ~ '...' }} <br><br>
           
             {% for ingredient in recipe.ingredients %}
                  <span class="badge text-bg-info flex-column" style="display:inline-block;"> {{ ingredient.name}}</span>
@@ -35,10 +35,14 @@
                <small  class="stretched-link">Nbr perso :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.nbPeople == null ? 'Non' : recipe.nbPeople}} </strong> ,&nbsp;
                <small  class="stretched-link">Temps (min) :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.time == null ? 'Non' : recipe.time}} </strong><br> 
                <small  class="stretched-link">Favorite :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.isFavorite == 0 ? 'Non' :'Oui'}} </strong> &nbsp;<br>
+                <small  class="stretched-link">Moyenne :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.average | number_format(1, '.', ',')}} </strong> &nbsp;<br>
+                  <small  class="stretched-link">votes :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.personne}} </strong> &nbsp;<br>
          </p>
          </div>
 
         </div>
       </div>
     </div>
+
+    {{form(form)}}
 {% endblock %}
