@@ -74,7 +74,7 @@ public function indexPublic(PaginatorInterface $paginator, RecipeRepository $rep
 }
 
 
-#[Security("is_granted('ROLE_USER') and recipe.isIsPublic() === true")]
+#[Security("is_granted('ROLE_USER') and recipe.isIsPublic() === true || user ===  recipe.getUser()")]
 #[Route('/recipe/{id}', name:'app_show', methods:['GET', 'POST'])]
 public function show(
     Recipe $recipe, 

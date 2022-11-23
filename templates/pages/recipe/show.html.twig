@@ -3,9 +3,9 @@
 {% block title %} {{ parent() }} | {{recipe.name}} {% endblock %}
 
 {% block body %}
-
+<div class="container ">
     <div class="row mb-2">
-    <div class="col-md-6">
+    <div class="col-md-6 mt-5">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           {# <strong class="d-inline-block mb-2 text-primary">World</strong> #}
@@ -16,11 +16,13 @@
             {% for ingredient in recipe.ingredients %}
                  <span class="badge text-bg-info flex-column" style="display:inline-block;"> {{ ingredient.name}}</span>
           {% endfor %}
+
+         <br> <img  class="mt-2" style="max-width:100%; height:120px;" src=" {{ vich_uploader_asset(recipe, 'imageFile')}}"/>
           </p>
 
         
         </div>
-        <div class="col-auto d-none d-lg-block rounded text-bg-dark" >
+        <div class="col-auto d-none d-lg-block  d-xl-block rounded text-bg-dark" >
         <strong class="d-inline-block mb-2 text-primary">creation    </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <strong class="d-inline-block mb-2 text-primary">     Mis a jour</strong> <br> 
         <h6 class=" btn btn-info mt-0  justify-content-center" style=" padding:2px; "> {{recipe.createdAt | date('d M Y')}}   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;   {{recipe.updateAt | date('d M Y')}} </h6>
@@ -36,13 +38,13 @@
                <small  class="stretched-link">Temps (min) :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.time == null ? 'Non' : recipe.time}} </strong><br> 
                <small  class="stretched-link">Favorite :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.isFavorite == 0 ? 'Non' :'Oui'}} </strong> &nbsp;<br>
                 <small  class="stretched-link">Moyenne :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.average | number_format(1, '.', ',')}} </strong> &nbsp;<br>
-                  <small  class="stretched-link">votes :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.personne}} </strong> &nbsp;<br>
+                  <small  class="stretched-link">votes :</small> <strong class="d-inline-block mb-0 text-success"> {{recipe.personne == null ? '0' : recipe.personne}} </strong> &nbsp;<br>
          </p>
          </div>
 
         </div>
       </div>
     </div>
-
+</div>
     {{form(form)}}
 {% endblock %}

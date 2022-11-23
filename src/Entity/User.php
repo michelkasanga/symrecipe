@@ -5,17 +5,18 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use  Symfony\Component\Validator\Constraints as Assert;
-use App\EntityListener\UserListener;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity('email')]
 #[ORM\EntityListeners(['App\EntityListener\UserListener'])]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -37,6 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
    #[Assert\Email()]
     #[Assert\Length(min:2, max: 180)]
     private ?string $email = null;
+
 
     #[ORM\Column]
     #[Assert\NotNull()]
@@ -96,6 +98,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     public function getPseudo(): ?string
     {
         return $this->pseudo;
@@ -131,6 +134,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
+    
     /**
      * @see UserInterface
      */

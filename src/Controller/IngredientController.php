@@ -88,7 +88,7 @@ public function edit( Request $request, IngredientRepository $repository, Ingred
     return $this->render('pages/ingredient/edit.html.twig',  ['form' => $form->createView()]);
 }
 
-#[Security("is_granted('ROLE_USER') and user ===ingredient.getUser()")]
+#[Security("is_granted('ROLE_USER') and user === ingredient.getUser()")]
 #[Route('/ingredient/delete/{id}', name:'app_ingredient_delete', methods:[ 'GET'])]
 public function delete(Ingredient $ingredient, IngredientRepository $repository): Response
 {

@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RecipeType extends AbstractType
 {
@@ -79,7 +79,7 @@ class RecipeType extends AbstractType
                 'attr' =>[
                     'class' => 'form-range',
                     'min' => "1",
-                    'max' => "5",
+                    'max' => "6",
                     'step'=>"1",
                     //  class="form-range" min="0" max="5" step="0.5"
                 ],
@@ -190,6 +190,16 @@ class RecipeType extends AbstractType
             ]
 
            ) 
+
+           ->add('imageFile', VichImageType::class, [
+            'label' => 'Image de la recette',
+            'label_attr'=> [
+                'class' => 'form-label  mt-4'
+            ],
+            'attr'=> [
+                'class' => 'form-control'
+            ]
+           ])
             ->add('submit'  ,SubmitType::class,[
                 'attr'=>[
                     'class'=>'btn btn-primary mt-4'

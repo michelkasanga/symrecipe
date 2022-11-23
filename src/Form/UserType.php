@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use  Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -46,7 +47,7 @@ class UserType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 50]),
                 ],
             ])
-
+    
             ->add('plainPassword',   PasswordType::class, [
                     'attr'=>[
                         'class'=> 'form-control me-2',

@@ -4,18 +4,18 @@
 
 {% block body %}
     <div class="container mt-4">
-   
-    
-    <h1 class="title "> Ingredients</h1>
-    <a class="btn btn-primary" href="{{ path('app_new_ingredient')}}"> Add</a>
- {% if not ingredient.items is same as([])%}
-    {% for message in app.flashes('success') %}
+     {% for message in app.flashes('success') %}
 <div class="alert alert-info mt-4">
          {{ message }}
 </div>
 {% endfor %}
+    
+   
+ {% if not ingredient.items is same as([])%}
+   <h1 class="title "> Ingredients</h1>
+    <a class="btn btn-primary" href="{{ path('app_new_ingredient')}}"> Add</a>
  <div class="count">
-    il y a {{ ingredient.getTotalItemCount }} ingredients
+    il y a {% if( ingredient.getTotalItemCount == 1) %}{{  ingredient.getTotalItemCount }} ingredient {% else %}  {{  ingredient.getTotalItemCount }} ingredients {%  endif %}
 </div>
     <table class="table table-hover">
             <thead >
@@ -47,7 +47,9 @@
     {{ knp_pagination_render(ingredient) }}
 </div>
         {% else %}
+    
     <h2>Empty</h2>
+        <a class="btn btn-primary" href="{{ path('app_new_ingredient')}}"> Add</a>
     {% endif %}
   
     </div>
