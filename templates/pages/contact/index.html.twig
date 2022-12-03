@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | Contact{% endblock %}
+
+{% block body %}
+{% for message in app.flashes('success') %}
+<div class="alert alert-info mt-4">
+         {{ message }}
+</div>
+{% endfor %}
+{{ form(form) }}
+{% endblock %}
